@@ -7,9 +7,9 @@ module.exports = function(grunt) {
             dynamic: {
                 files: [{
                     expand: true,
-                    cwd: 'images/',
+                    cwd: 'app/images/',
                     src: ['**/*.{png,jpg,gif}'],
-                    dest: 'images/build/'
+                    dest: 'app/images/build/'
                 }]
             }
         },
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                     sourcemap: true
                 },
                 files: {
-                    'css/app.css': 'sass/app.scss'
+                    'app/css/app.css': 'app/sass/app.scss'
                 }
             }
         },
@@ -32,13 +32,13 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['js/*.js'],
+                files: ['app/**/*.js'],
                 options: {
                     spawn: false
                 }
             },
             images: {
-                files: ['images/**/*.{png,jpg,gif}', 'images/*.{png,jpg,gif}'],
+                files: ['app/images/**/*.{png,jpg,gif}', 'app/images/*.{png,jpg,gif}'],
                 tasks: ['imagemin'],
                 options: {
                     spawn: false
@@ -59,12 +59,9 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('default', ['watch', 'sass']);
 
