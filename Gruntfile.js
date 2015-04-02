@@ -17,12 +17,12 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    style: 'expanded',
+                    style: 'compressed',
                     debugInfo: true,
                     sourcemap: true
                 },
                 files: {
-                    'app/css/app.css': 'app/sass/app.scss'
+                    'app/public/css/app.css': 'app/sass/app.scss'
                 }
             }
         },
@@ -46,6 +46,13 @@ module.exports = function(grunt) {
             },
             html:{
                 files: ['./**/*.html'],
+                tasks: [],
+                options: {
+                    spawn: false
+                }
+            },
+            jade:{
+                files: ['./**/*.jade'],
                 tasks: [],
                 options: {
                     spawn: false

@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title = "pre Tic Tac Toe app"
+        link(rel='stylesheet', href='/css/app.css')
+    body
+        #ttt.ttt
+            ul.row
+                li.cell
+                li.cell.tic
+                li.cell
+            ul.row
+                li.cell
+                li.cell.toe
+                li.cell
+            ul.row
+                li.cell
+                li.cell
+                li.cell
+
+        #footer.footer
+            | Tic Tac Toe. ver 0.0.1 Tanuki
+
+        script(src='/js/lib/jquery.min.js')
+        script(src='/js/ttt.js')
+        script(src='/socket.io/socket.io.js')

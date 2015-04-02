@@ -6,7 +6,7 @@ app.set('views', __dirname + '/tpl');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 app.get('/', function(reg, res) {
-    res.render('page');
+    res.render('layout');
 });
 app.use(express.static(__dirname + '/public'));
 

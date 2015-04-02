@@ -1,5 +1,60 @@
-body {
-  color: blue;
-  background: red;
-  border: 1px solid;
- }
+$cell: 50px;
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ttt {
+  height: 250px;
+  width: 250px;
+
+  .row {
+    clear: both;
+
+    &:last-child {
+      .cell {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .cell {
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    display: block;
+    float: left;
+    width: $cell;
+    height: $cell;
+
+    &.tic {
+      &:after {
+        display: block;
+        content: 'x';
+        position: absolute;
+        font-size: 46px;
+        margin-left: 13px;
+      }
+    }
+
+    &.toe {
+      &:after {
+        display: block;
+        content: 'o';
+        position: absolute;
+        font-size: 46px;
+        margin-left: 13px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+}
