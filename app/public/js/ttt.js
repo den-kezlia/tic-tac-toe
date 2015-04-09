@@ -2,27 +2,31 @@ $(document).ready(function() {
     App = {
         matrix: [],
         layout: $('#ttt'),
-        cell: $('.cell'),
+        cells: $('.cell'),
         tic: 10,
         toe: 100,
         lastTurn: 'toe',
         winners: [30, 300],
         winnerDiv: $('#winner'),
+        resetButton: $("#reset"),
 
         init: function() {
-           this.initBaseLayout();
-           this.initPlayers();
+            this.initBaseLayout();
+            this.initPlayers();
+            this.initResetButton();
         },
 
         initBaseLayout: function() {
-           App.matrix =
+            App.matrix =
                [[0, 0, 0],
                [0, 0, 0],
                [0, 0, 0]];
+
+            App.cells.removeClass("tic toe disabled");
         },
 
         initPlayers: function() {
-            App.cell.on('click', function() {
+            App.cells.on('click', function() {
                 var cell = $(this);
                 var newTurn = '';
 
@@ -75,7 +79,14 @@ $(document).ready(function() {
         },
 
         disableGame: function() {
-            App.cell.addClass('disable');
+            App.cells.addClass('disable');
+        },
+
+        initResetButton: function() {
+            App.resetButton.on("click", function() {
+                App.initBaseLayout();
+                App.winnerDiv.html('');
+            });
         }
     };
 
