@@ -4,25 +4,27 @@ html
         title = "pre Tic Tac Toe app"
         link(rel='stylesheet', href='/css/app.css')
     body
-        #ttt.ttt
-            ul.row
-                li.cell(data-row=0, data-column=0)
-                li.cell(data-row=0, data-column=1)
-                li.cell(data-row=0, data-column=2)
-            ul.row
-                li.cell(data-row=1, data-column=0)
-                li.cell(data-row=1, data-column=1)
-                li.cell(data-row=1, data-column=2)
-            ul.row
-                li.cell(data-row=2, data-column=0)
-                li.cell(data-row=2, data-column=1)
-                li.cell(data-row=2, data-column=2)
+        #wrapper.wrapper
+            #main.main
+                #ttt.ttt
+                    ul.row
+                        li.cell(data-row=0, data-column=0)
+                        li.cell(data-row=0, data-column=1)
+                        li.cell(data-row=0, data-column=2)
+                    ul.row
+                        li.cell(data-row=1, data-column=0)
+                        li.cell(data-row=1, data-column=1)
+                        li.cell(data-row=1, data-column=2)
+                    ul.row
+                        li.cell(data-row=2, data-column=0)
+                        li.cell(data-row=2, data-column=1)
+                        li.cell(data-row=2, data-column=2)
 
-        button#reset.reset Reset
-        #winner.winner
+                button#reset.reset Reset
+                #winner.winner
 
-        #sidebar.sidebar
-            include blocks/versions.jade
+            #sidebar.sidebar
+                include blocks/versions.jade
 
         #footer.footer
             img(src='/images/tanuki-logo.png')
