@@ -53,6 +53,10 @@ li {
       cursor: pointer;
     }
 
+    &.disabled:hover {
+      cursor: auto;
+    }
+
     &:first-child {
       border-left: none;
     }

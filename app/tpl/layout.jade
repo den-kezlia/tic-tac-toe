@@ -6,17 +6,19 @@ html
     body
         #ttt.ttt
             ul.row
-                li.cell
-                li.cell.tic
-                li.cell
+                li.cell(data-row=0, data-column=0)
+                li.cell(data-row=0, data-column=1)
+                li.cell(data-row=0, data-column=2)
             ul.row
-                li.cell
-                li.cell.toe
-                li.cell
+                li.cell(data-row=1, data-column=0)
+                li.cell(data-row=1, data-column=1)
+                li.cell(data-row=1, data-column=2)
             ul.row
-                li.cell
-                li.cell
-                li.cell
+                li.cell(data-row=2, data-column=0)
+                li.cell(data-row=2, data-column=1)
+                li.cell(data-row=2, data-column=2)
+
+        #winner.winner
 
         #footer.footer
             | Tic Tac Toe. ver 0.0.1 Tanuki
