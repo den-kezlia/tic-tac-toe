@@ -1,8 +1,8 @@
 doctype html
 html
     head
-        title = "pre Tic Tac Toe app"
-        link(rel='stylesheet', href='/css/app.css')
+        title = "pre Tic Tac Toe app 0.0.1"
+        link(rel='stylesheet', href='/css/ver001/app.css')
     body
         #ttt.ttt
             ul.row
@@ -21,12 +21,12 @@ html
         #winner.winner
 
         #sidebar.sidebar
-            include blocks/versions.jade
+            include ../blocks/versions.jade
 
         #footer.footer
             img(src='/images/tanuki-logo.png')
             | Tic Tac Toe. ver 0.0.1 Tanuki
 
-        script(src='/js/lib/jquery.min.js')
-        script(src='/js/ttt.js')
+        script(src='/js/ver001/lib/jquery.min.js')
+        script(src='/js/ver001/ttt.js')
         script(src='/socket.io/socket.io.js')

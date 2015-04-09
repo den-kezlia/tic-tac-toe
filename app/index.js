@@ -5,9 +5,15 @@ var port = 3700;
 app.set('views', __dirname + '/tpl');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
+
 app.get('/', function(reg, res) {
     res.render('layout');
 });
+
+app.get('/ver-0.0.1', function(reg, res) {
+    res.render('ver001/layout');
+});
+
 app.use(express.static(__dirname + '/public'));
 
 var io = require('socket.io').listen(app.listen(port));
