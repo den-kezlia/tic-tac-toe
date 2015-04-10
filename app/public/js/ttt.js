@@ -9,11 +9,38 @@ $(document).ready(function() {
         winners: [30, 300],
         winnerDiv: $('#winner'),
         resetButton: $("#reset"),
+        socket: io.connect('http://localhost:3700'),
 
         init: function() {
             this.initBaseLayout();
+            this.initSocket();
             this.initPlayers();
             this.initResetButton();
+        },
+
+        initSocket: function() {
+            App.socket.on('matrix', function(data) {
+                var matrix = data.matrix;
+                App.matrix = matrix;
+                App.lastTurn = data.lastTurn;
+
+                for (var row = 0; row < matrix.length; row++) {
+                    for (var column = 0; column < matrix[row].length; column++) {
+                        if (matrix[row][column] == 0) {
+                            App.cells.filter('[data-row="' + row + '"]')
+                                     .filter('[data-column="' + column + '"]').removeClass("tic tac disabled");
+                        } else if (matrix[row][column] == App.tic) {
+                            App.cells.filter('[data-row="' + row + '"]')
+                                .filter('[data-column="' + column + '"]').addClass("tic disabled");
+                        } else if (matrix[row][column] == App.toe) {
+                            App.cells.filter('[data-row="' + row + '"]')
+                                .filter('[data-column="' + column + '"]').addClass("toe disabled");
+                        }
+                    }
+                }
+
+                App.checkWinner();
+            });
         },
 
         initBaseLayout: function() {
@@ -22,7 +49,16 @@ $(document).ready(function() {
                [0, 0, 0],
                [0, 0, 0]];
 
+            App.lastTurn = 'toe';
             App.cells.removeClass("tic toe disabled");
+            App.sendGameBoard();
+        },
+
+        sendGameBoard: function() {
+            App.socket.emit('updateMatrix', {
+                matrix: App.matrix,
+                lastTurn: App.lastTurn
+            });
         },
 
         initPlayers: function() {
@@ -37,11 +73,9 @@ $(document).ready(function() {
                         newTurn = 'toe';
                     }
 
-                    cell.addClass("disabled").addClass(newTurn);
                     App.matrix[cell.data("row")][cell.data("column")] = App[newTurn];
                     App.lastTurn = newTurn;
-
-                    App.checkWinner();
+                    App.sendGameBoard();
                 }
 
             });
@@ -79,7 +113,7 @@ $(document).ready(function() {
         },
 
         disableGame: function() {
-            App.cells.addClass('disable');
+            App.cells.addClass('disabled');
         },
 
         initResetButton: function() {
