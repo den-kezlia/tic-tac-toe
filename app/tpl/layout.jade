@@ -15,20 +15,23 @@ html
                         li.cell(data-row=1, data-column=0)
                         li.cell(data-row=1, data-column=1)
                         li.cell(data-row=1, data-column=2)
-                    ul.row
+                    ul.row.last
                         li.cell(data-row=2, data-column=0)
                         li.cell(data-row=2, data-column=1)
                         li.cell(data-row=2, data-column=2)
 
-                button#reset.reset Reset
+                    button#reset.reset Reset
                 #winner.winner
 
             #sidebar.sidebar
                 include blocks/versions.jade
 
         #footer.footer
-            img(src='/images/tanuki-logo.png')
-            | Tic Tac Toe. ver 0.0.2 Tanuki
+            .footer-inner
+                .logo
+                    img(src='/images/tanuki-logo.png')
+                .version
+                    | Tic Tac Toe. ver 0.0.2 Tanuki
 
         script(src='/js/lib/jquery.min.js')
         script(src='/js/ttt.js')

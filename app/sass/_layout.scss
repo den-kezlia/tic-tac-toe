@@ -8,12 +8,25 @@ html,
   margin-bottom: -100px;
 }
 
+.main {
+  float: left;
+  width: 85%;
+}
+
+.sidebar {
+  float: right;
+  width: 15%;
+}
+
 .footer {
   clear: both;
   height: 100px;
 }
 
-.sidebar {
-  float: right;
-  width: 20%;
+a {
+  color: $link_color;
+
+  &:hover {
+    color: $link_hover;
+  }
 }

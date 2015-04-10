@@ -1,11 +1,8 @@
 @import 'reset';
 @import 'settings';
 @import 'layout';
-
-.main {
-  float: left;
-  width: 80%;
-}
+@import 'blocks/sidebar';
+@import 'blocks/footer';
 
 .ttt {
   position: absolute;
@@ -16,7 +13,7 @@
   .row {
     clear: both;
 
-    &:last-child {
+    &.last {
       .cell {
         border-bottom: none;
       }
@@ -65,5 +62,8 @@
   }
 }
 
-
-
+.reset {
+  width: 152px;
+  height: 28px;
+  margin-top: 20px;
+}
