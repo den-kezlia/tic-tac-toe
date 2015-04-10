@@ -63,7 +63,14 @@
 }
 
 .reset {
-  width: 152px;
+  width: $ttt_size;
   height: 28px;
   margin-top: 20px;
+}
+
+.winner {
+  height: 20px;
+  width: $ttt_size;
+  margin-bottom: 10px;
+  text-align: center;
 }

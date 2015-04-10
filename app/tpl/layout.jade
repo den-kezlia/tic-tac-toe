@@ -7,6 +7,8 @@ html
         #wrapper.wrapper
             #main.main
                 #ttt.ttt
+                    #winner.winner
+
                     ul.row
                         li.cell(data-row=0, data-column=0)
                         li.cell(data-row=0, data-column=1)
@@ -21,7 +23,6 @@ html
                         li.cell(data-row=2, data-column=2)
 
                     button#reset.reset Reset
-                #winner.winner
 
             #sidebar.sidebar
                 include blocks/versions.jade
