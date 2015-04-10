@@ -14,6 +14,10 @@ app.get('/ver-0.0.1', function(reg, res) {
     res.render('ver001/layout');
 });
 
+app.get('/ver-0.0.2', function(reg, res) {
+    res.render('ver002/layout');
+});
+
 app.use(express.static(__dirname + '/public'));
 
 var io = require('socket.io').listen(app.listen(port));
