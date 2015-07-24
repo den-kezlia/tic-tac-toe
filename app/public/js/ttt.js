@@ -1,7 +1,9 @@
 $(document).ready(function() {
     App = {
+        port: '3700',
+        host: 'localhost',
         matrix: [],
-        layout: $('#ttt'),
+        layout: $('#game-board'),
         cells: $('.cell'),
         tic: 10,
         toe: 100,
@@ -10,15 +12,54 @@ $(document).ready(function() {
         winnerDiv: $('#winner'),
         resetButton: $("#reset"),
         socket: io.connect('http://localhost:3700'),
+        team: $(".team"),
+        start: $("#startgame"),
+        username: $("#username"),
 
         init: function() {
-            this.initBaseLayout();
-            this.initSocket();
+            this.hideGameBoard();
+            this.selectTeam();
+            this.initSockets();
             this.initPlayers();
             this.initResetButton();
         },
 
-        initSocket: function() {
+        hideGameBoard: function() {
+            $('#main').hide();
+        },
+
+        showGameBoard: function() {
+            $("#waitingForPlayer").hide();
+            $('#main').show();
+        },
+
+        selectTeam: function() {
+            App.start.on("click", function() {
+                App.socket.emit('selectTeam', {
+                    team: App.team.filter(':checked').val(),
+                    name: App.username.val()
+                });
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    //login: this.elements.login.value,
+                    //password: this.elements.password.value
+                }));
+
+                xhr.onload = function() {
+                    if (this.responseText === "ok") {
+                        document.location = "/";
+                    }
+                    else{
+                        alert(this.responseText);
+                    }
+                };
+            });
+        },
+
+        initSockets: function() {
             App.socket.on('matrix', function(data) {
                 var matrix = data.matrix;
                 App.matrix = matrix;
@@ -41,6 +82,36 @@ $(document).ready(function() {
 
                 App.checkWinner();
             });
+
+            App.socket.on("noFreeSpace", function() {
+                $("#room").show().html('no free space');
+            });
+
+            App.socket.on("startGame", function(roomId) {
+                $("#select-team").hide();
+                $("#room").show().find('.value').html(roomId);
+
+                App.showGameBoard();
+                App.initBaseLayout();
+            });
+
+            App.socket.on("waitingForPlayer", function(data) {
+                $("#select-team").hide();
+                $("#waitingForPlayer").show();
+                $("#players").show();
+                $("#first-player").html(data.name);
+                $("#room").show().find('.value').html(data.roomId);
+            });
+
+            App.socket.on("rivalInfo", function(data) {
+                $("#players").show();
+                $("#first-player").html(data.name);
+                $("#second-player").html(data.rival);
+            });
+
+            App.socket.on("sendGameBoard", function(layout) {
+                App.updateLayout(layout);
+            });
         },
 
         initBaseLayout: function() {
@@ -61,23 +132,13 @@ $(document).ready(function() {
             });
         },
 
+        sendStep: function(data) {
+            App.socket.emit('getStep', data);
+        },
+
         initPlayers: function() {
-            App.cells.on('click', function() {
-                var cell = $(this);
-                var newTurn = '';
-
-                if ( !cell.hasClass("disabled") ) {
-                    if (App.lastTurn == 'toe') {
-                        newTurn = 'tic';
-                    } else {
-                        newTurn = 'toe';
-                    }
-
-                    App.matrix[cell.data("row")][cell.data("column")] = App[newTurn];
-                    App.lastTurn = newTurn;
-                    App.sendGameBoard();
-                }
-
+            $('.cell').on('click', function() {
+                App.sendStep({row: $(this).data("row"), column: $(this).data("column")});
             });
         },
 
@@ -121,6 +182,30 @@ $(document).ready(function() {
                 App.initBaseLayout();
                 App.winnerDiv.html('');
             });
+        },
+
+        updateLayout: function(layout) {
+            var html = '';
+
+            for (var row = 0; row < layout.length; row++) {
+                html += '<ul class="row">';
+
+                for (var column = 0; column < layout.length; column++) {
+                    var cellClass = '';
+                    if (layout[row][column] == App.tic) {
+                        cellClass = 'tic';
+                    } else if (layout[row][column] == App.toe) {
+                        cellClass = 'toe';
+                    }
+
+                    html += '<li class="cell ' + cellClass + '" data-row="' + row + '" data-column="' + column + '"></li>';
+                }
+
+                html += '</ul>';
+            }
+
+            App.layout.html(html);
+            App.initPlayers();
         }
     };
 

@@ -1,39 +1,10 @@
 doctype html
 html
-    head
-        title = "pre Tic Tac Toe app"
-        link(rel='stylesheet', href='/css/app.css')
+    include ./blocks/head
     body
         #wrapper.wrapper
-            #main.main
-                #ttt.ttt
-                    #winner.winner
+            block content
+            include ./blocks/sidebar.jade
+            include ./blocks/footer.jade
 
-                    ul.row
-                        li.cell(data-row=0, data-column=0)
-                        li.cell(data-row=0, data-column=1)
-                        li.cell(data-row=0, data-column=2)
-                    ul.row
-                        li.cell(data-row=1, data-column=0)
-                        li.cell(data-row=1, data-column=1)
-                        li.cell(data-row=1, data-column=2)
-                    ul.row.last
-                        li.cell(data-row=2, data-column=0)
-                        li.cell(data-row=2, data-column=1)
-                        li.cell(data-row=2, data-column=2)
-
-                    button#reset.reset Reset
-
-            #sidebar.sidebar
-                include blocks/versions.jade
-
-        #footer.footer
-            .footer-inner
-                .logo
-                    img(src='/images/kitsune-logo.png')
-                .version
-                    | Tic Tac Toe. ver 0.1.0 Kitsune
-
-        script(src='/js/lib/jquery.min.js')
-        script(src='/js/ttt.js')
-        script(src='/socket.io/socket.io.js')
+    include ./blocks/scripts.jade

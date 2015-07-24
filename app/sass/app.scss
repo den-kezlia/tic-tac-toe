@@ -3,64 +3,8 @@
 @import 'layout';
 @import 'blocks/sidebar';
 @import 'blocks/footer';
-
-.ttt {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -126px 0 0 -126px;
-
-  .row {
-    clear: both;
-
-    &.last {
-      .cell {
-        border-bottom: none;
-      }
-    }
-  }
-
-  .cell {
-    border-left: 1px solid;
-    border-bottom: 1px solid;
-    display: block;
-    float: left;
-    width: $cell;
-    height: $cell;
-
-    &.tic {
-      &:after {
-        display: block;
-        content: 'x';
-        position: absolute;
-        font-size: 46px;
-        margin-left: 13px;
-      }
-    }
-
-    &.toe {
-      &:after {
-        display: block;
-        content: 'o';
-        position: absolute;
-        font-size: 46px;
-        margin-left: 13px;
-      }
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &.disabled:hover {
-      cursor: auto;
-    }
-
-    &:first-child {
-      border-left: none;
-    }
-  }
-}
+@import 'blocks/board';
+@import 'blocks/board_info';
 
 .reset {
   width: $ttt_size;

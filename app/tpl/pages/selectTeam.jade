@@ -1,0 +1,14 @@
+extends ./../layout
+
+block content
+   #select-team.select-team
+      .form-row
+         input(value="tic", type="radio", id="tic", name="select-team", class="team")
+         label(for="tic") Tic
+      .form-row
+         input(value="toe", type="radio", id="toe", name="select-team", class="team")
+         label(for="toe") Toe
+      .form-row
+         input(value="", type="text", id="username", name="username", class="username", plasehlder="Enter Your Name")
+      .form-row
+         button(type="button", id="startgame", name="startgame", class="button startgame") Start Game

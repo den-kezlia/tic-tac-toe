@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "author": "Den Kezlya",
   "dependencies": {
-    "socket.io": "latest",
-    "express": "latest",
+    "express.io": "latest",
     "jade": "latest"
   },
   "devDependencies": {
